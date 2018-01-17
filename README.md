@@ -3,6 +3,7 @@
 ## Prerequisites
 
 * Disable SeLinux
+
 To permanently disable SELinux, use your favorite text editor to open the file `/etc/sysconfig/selinux` as follows:
 ```
 # vim /etc/sysconfig/selinux
@@ -22,7 +23,8 @@ $ sestatus
 ![Check SELinux Status](https://www.tecmint.com/wp-content/uploads/2016/07/Check-SELinux-Status.png)
 
 * Packages
-Instal the required packages. The opsview meta package should bring in most packages however there are a couple that aren't declared dependencies.
+
+Install the required packages. The opsview meta package should bring in most packages however there are a couple that aren't declared dependencies.
 ```
 # yum install -y mysql-server java rrdtool-perl redhat-lsb perl-Net-SNMP perl-MOP
 ```

@@ -7,22 +7,19 @@ To permanently disable SELinux, use your favorite text editor to open the file `
 ```
 #vim /etc/sysconfig/selinux
 ```
-SELinux Enforcing Mode
-SELinux Enforcing Mode
+![SELinux Enforcing Mode](https://www.tecmint.com/wp-content/uploads/2016/07/SELinux-Enforcing-Mode.png)
 
 Then change the directive `SELinux=enforcing` to `SELinux=disabled` as shown in the below image.
 ```
 SELINUX=disabled
 ```
-Disable SELinux Permanently
-Disable SELinux Permanently
+![Disable SELinux Permanently](https://www.tecmint.com/wp-content/uploads/2016/07/Disable-SELinux.png)
 
 Then, save and exit the file, for the changes to take effect, you need to reboot your system and then check the status of SELinux using sestatus command as shown:
 ```
 $ sestatus
 ```
-Check SELinux Status
-Check SELinux Status
+![Check SELinux Status](https://www.tecmint.com/wp-content/uploads/2016/07/Check-SELinux-Status.png)
 
 * Packages
 Instal the required packages. The opsview meta package should bring in most packages however there are a couple that aren't declared dependencies.

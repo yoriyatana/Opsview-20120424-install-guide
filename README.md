@@ -107,13 +107,11 @@ Use a web browser to view the web interface on port 3000 of the host. The initia
 Username	admin
 Password	initial
  ```
-
-Screensnap 2011-09-29_174514.png
- 
+![Login sreenshot](https://plone.lucidsolutions.co.nz/web/management/images/screensnap-2011-09-29-174514.png/image_preview) 
 
 ### Nginx Web Server
-Instead of the stock recommended Apache httpd configuration use Nginx as a web server to server the static content and proxy the dynamic pages.  This is based on the information in the Apache httpd sample configuration '/usr/local/nagios/installer/apache_proxy.conf
-'.
+Instead of the stock recommended Apache httpd configuration use Nginx as a web server to server the static content and proxy the dynamic pages.  This is based on the information in the Apache httpd sample configuration `'/usr/local/nagios/installer/apache_proxy.conf
+'`.
 ```
 server {
     listen       [::]:80;
@@ -138,7 +136,7 @@ server {
 ```
 
 ### Nginx Reverse proxy
-Use Nginx as a front-door reverse proxy with SSL offload. Note that the Catalyst engine requires the 'X-Forwarded-...' headers to be set so that the URL's are rewritten correctly.
+Use Nginx as a front-door reverse proxy with SSL offload. Note that the Catalyst engine requires the `'X-Forwarded-...'` headers to be set so that the URL's are rewritten correctly.
 ```
 server {
     listen               [::]:80;
@@ -175,6 +173,7 @@ server {
 ```
 ### Residuals
 No caching of web site content
+
 Static content is served by the OpsView perl module
 
 ## Source

@@ -1,8 +1,46 @@
-***************
-Opsview Control
-***************
+# Opsview Control
+
 
 ``opsview_control.rb`` can be used to export the state of a running Opsview installation, import a stored state into a new Opsview instance, and recursively delete hosts in a hostgroup.
+
+Prerequisites
+=====
+``opsview_control.rb`` requires Ruby version >= 2.0
+
+Installation
+=====
+### Step One—Install Ruby
+The easiest way to install Ruby on your virtual server is through the yum package installer.
+```
+# yum install ruby
+```
+After you say yes to the prompt, Ruby will install.
+
+Then we need some additional Ruby dependancies.
+
+Type the following into terminal:
+```
+# yum install -y gcc g++ gcc-c++ make automake autoconf curl-devel openssl-devel zlib-devel httpd-devel apr-devel apr-util-devel sqlite-devel
+# yum install -y ruby-rdoc ruby-devel 
+```
+While it processes, the prompt may ask your permission to install the various packages. Go ahead and say yes each time.
+
+### Step Two—Install Ruby Gems
+Once you have Ruby installed, you can easily install the ruby gems.
+
+Type this command into terminal:
+```
+# yum install -y rubygems
+```
+After you have agreed to the prompt, ruby gems should be installed on your VPS. However, if you have any issues with this process, you can use an alternate method to install the Ruby Gems.
+
+```
+gem install rest-client trollop
+```
+```
+wget https://raw.githubusercontent.com/mozilla/identity-ops/master/opsview-tools/opsview_control.rb
+chmod a+x opsview_control.rb
+```
 
 Usage
 =====

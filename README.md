@@ -45,7 +45,7 @@ yum localinstall -y --nogpgcheck opsview-*
 ## Configuration
 After the Opsview packages have been installed, it is necessary to configure Opsview and its databases.
 ### MySQL
-Add the following to the [ mysqld] section of `'/etc/my.cnf'`:
+Add the following to the `[ mysqld]` section of `'/etc/my.cnf'`:
 ```
 bind-address = localhost
 
@@ -63,12 +63,6 @@ Change the MySql root password:
 # /usr/bin/mysqladmin -u root password {password}
 ```
 
-If you get an error like:
-error: 'Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock'
-Then mysql has not been started. Start it with systemctl mariadb.service restart and ensure it is set to start at boot time with 
-```
-chkconfig –level 345 mysqld on
-```
 ### Nagios user setup
 The rest of the steps should be performed as the nagios user
 ```
@@ -104,8 +98,8 @@ Controller::Root:
 ### Initial setup
 Use a web browser to view the web interface on port 3000 of the host. The initial credentials are:
 ```
-Username	admin
-Password	initial
+Username:	admin
+Password:	initial
  ```
 ![Login sreenshot](https://plone.lucidsolutions.co.nz/web/management/images/screensnap-2011-09-29-174514.png/image_preview) 
 

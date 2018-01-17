@@ -40,7 +40,7 @@ opsview-web-3.20120424.0.8487-1.el6.noarch.rpm
 and transfer these to your Opsview server.
 As root you should then install these packages by running
 ```
-yum localinstall --nogpgcheck opsview-*
+yum localinstall -y --nogpgcheck opsview-*
 ```
 ## Configuration
 After the Opsview packages have been installed, it is necessary to configure Opsview and its databases.

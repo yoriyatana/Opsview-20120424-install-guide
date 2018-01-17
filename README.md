@@ -29,9 +29,24 @@ Instal the required packages. The opsview meta package should bring in most pack
 ```
 # yum install -y mysql-server java rrdtool-perl redhat-lsb perl-Net-SNMP perl-MOP
 ```
-
+### OPSview RPM Installation (Offline)
+Download the following files appropriate for your system
+```
+opsview-base
+opsview-perl
+opsview-core
+opsview-web
+mod_auth_tkt_opsview
+opsview-jasper
+opsview-reporting-module
+```
+and transfer these to your Opsview server.
+As root you should then install these packages by running
+```
+yum localinstall --nogpgcheck opsview-*
+```
 ## Configuration
-
+After the Opsview packages have been installed, it is necessary to configure Opsview and its databases.
 ### MySQL
 Add the following to the [ mysqld] section of `'/etc/my.cnf'`:
 ```
@@ -48,26 +63,37 @@ innodb_buffer_pool_size=256M
 ```
 Change the MySql root password:
 ```
-# /usr/bin/mysqladmin -u root password password
+# /usr/bin/mysqladmin -u root password {password}
+```
+
+If you get an error like:
+error: 'Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock'
+Then mysql has not been started. Start it with systemctl mariadb.service restart and ensure it is set to start at boot time with 
+```
+chkconfig –level 345 mysqld on
 ```
 ### Nagios user setup
+The rest of the steps should be performed as the nagios user
+```
+# su nagios
+```
 Add the following line to the nagios users `'.bash_profile'`.
 ```
 nagios$ echo "test -f /usr/local/nagios/bin/profile && . /usr/local/nagios/bin/profile" >> ~/.bash_profile
 ```
 ### Create the Nagios database
 ```
-# /usr/local/nagios/bin/db_mysql -u root -ppassword
+nagios$ /usr/local/nagios/bin/db_mysql -u root -ppassword
 ```
 ### OpsView
 As the nagios user edit the file `'/usr/local/nagios/etc/opsview.conf'` and populate it with passwords.
 ```
-# /usr/local/nagios/bin/db_opsview db_install
-# /usr/local/nagios/bin/db_runtime db_install
-# /usr/local/nagios/bin/db_odw db_install
-# /usr/local/nagios/bin/db_reports db_install
+nagios$ /usr/local/nagios/bin/db_opsview db_install
+nagios$ /usr/local/nagios/bin/db_runtime db_install
+nagios$ /usr/local/nagios/bin/db_odw db_install
+nagios$ /usr/local/nagios/bin/db_reports db_install
 
-# /usr/local/nagios/bin/rc.opsview gen_config
+nagios$ /usr/local/nagios/bin/rc.opsview gen_config
 ```
 Due to a known limitation add the following to the file `' /usr/local/opsview-web/opsview_web_local.yml'`. This is a new file that didn't exist in the distribution:
 ```
@@ -86,8 +112,6 @@ Password	initial
  ```
 
 Screensnap 2011-09-29_174514.png
- 
-
  
 
 ### Nginx Web Server

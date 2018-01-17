@@ -32,13 +32,11 @@ Instal the required packages. The opsview meta package should bring in most pack
 ### OPSview RPM Installation (Offline)
 Download the following files appropriate for your system
 ```
-opsview-base
-opsview-perl
-opsview-core
-opsview-web
-mod_auth_tkt_opsview
-opsview-jasper
-opsview-reporting-module
+opsview-3.20120424.0.8487-1.el6.noarch.rpm
+opsview-base-4.0.0.8487-1.el6.x86_64.rpm
+opsview-core-3.20120424.0.8487-1.el6.noarch.rpm
+opsview-perl-4.0.0.660-1.el6.x86_64.rpm
+opsview-web-3.20120424.0.8487-1.el6.noarch.rpm
 ```
 and transfer these to your Opsview server.
 As root you should then install these packages by running

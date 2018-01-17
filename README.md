@@ -1,6 +1,6 @@
 # Opview-20120424-install-guide
 
-##Prerequisites
+## Prerequisites
 
 * Disable SeLinux
 To permanently disable SELinux, use your favorite text editor to open the file `/etc/sysconfig/selinux` as follows:
@@ -30,9 +30,9 @@ Instal the required packages. The opsview meta package should bring in most pack
 # yum install -y mysql-server java rrdtool-perl redhat-lsb perl-Net-SNMP perl-MOP
 ```
 
-##Configuration
+## Configuration
 
-###MySQL
+### MySQL
 Add the following to the [ mysqld] section of `'/etc/my.cnf'`:
 ```
 bind-address = localhost
@@ -50,16 +50,16 @@ Change the MySql root password:
 ```
 # /usr/bin/mysqladmin -u root password password
 ```
-###Nagios user setup
+### Nagios user setup
 Add the following line to the nagios users `'.bash_profile'`.
 ```
 nagios$ echo "test -f /usr/local/nagios/bin/profile && . /usr/local/nagios/bin/profile" >> ~/.bash_profile
 ```
-###Create the Nagios database
+### Create the Nagios database
 ```
 # /usr/local/nagios/bin/db_mysql -u root -ppassword
 ```
-###OpsView
+### OpsView
 As the nagios user edit the file `'/usr/local/nagios/etc/opsview.conf'` and populate it with passwords.
 ```
 # /usr/local/nagios/bin/db_opsview db_install
@@ -74,11 +74,11 @@ Due to a known limitation add the following to the file `' /usr/local/opsview-we
 Controller::Root:
   authtkt_ignoreip: 1
 ```
-###Start the web service.
+### Start the web service.
 ```
 # service opsview-web start
 ```
-###Initial setup
+### Initial setup
 Use a web browser to view the web interface on port 3000 of the host. The initial credentials are:
 ```
 Username	admin
@@ -90,10 +90,10 @@ Screensnap 2011-09-29_174514.png
 
  
 
-Nginx Web Server
+### Nginx Web Server
 Instead of the stock recommended Apache httpd configuration use Nginx as a web server to server the static content and proxy the dynamic pages.  This is based on the information in the Apache httpd sample configuration '/usr/local/nagios/installer/apache_proxy.conf
 '.
-
+```
 server {
     listen       [::]:80;
     server_name  _;
@@ -114,11 +114,11 @@ server {
         proxy_pass             http://localhost:3000;
     }
 }
- 
+```
 
-Nginx Reverse proxy
+### Nginx Reverse proxy
 Use Nginx as a front-door reverse proxy with SSL offload. Note that the Catalyst engine requires the 'X-Forwarded-...' headers to be set so that the URL's are rewritten correctly.
-
+```
 server {
     listen               [::]:80;
     server_name          opsview.lucidsolutions.co.nz;
@@ -151,6 +151,7 @@ server {
         proxy_set_header        X-Forwarded-Port 443;
     }
 }
-Residuals
+```
+### Residuals
 No caching of web site content
 Static content is served by the OpsView perl module

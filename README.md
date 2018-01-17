@@ -174,3 +174,9 @@ server {
 ### Residuals
 No caching of web site content
 Static content is served by the OpsView perl module
+
+## Source
+
+* https://www.tecmint.com/disable-selinux-temporarily-permanently-in-centos-rhel-fedora/
+* https://plone.lucidsolutions.co.nz/web/management/ebony-an-opsview-centos-6-monitoring-vm
+* https://knowledge.opsview.com/v5.0/docs/rpm-installation-offline

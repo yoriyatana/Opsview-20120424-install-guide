@@ -5,7 +5,7 @@
 * Disable SeLinux
 To permanently disable SELinux, use your favorite text editor to open the file `/etc/sysconfig/selinux` as follows:
 ```
-#vim /etc/sysconfig/selinux
+# vim /etc/sysconfig/selinux
 ```
 ![SELinux Enforcing Mode](https://www.tecmint.com/wp-content/uploads/2016/07/SELinux-Enforcing-Mode.png)
 

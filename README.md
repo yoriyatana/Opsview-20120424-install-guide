@@ -66,6 +66,20 @@ Change the MySql root password:
 ```
 
 ### Nagios user setup
+
+Adding the Nagios User and Group
+Next add the appropriate user and groups for the Nagios process to run:
+```
+useradd nagios
+groupadd nagcmd
+usermod -a -G nagcmd nagios
+```
+
+For RHEL/CentOS users:
+```
+usermod -a -G nagios,nagcmd apache
+```
+
 The rest of the steps should be performed as the nagios user
 ```
 # su nagios

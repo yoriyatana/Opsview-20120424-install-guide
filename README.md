@@ -53,6 +53,7 @@ innodb_file_per_table=1
 innodb_flush_log_at_trx_commit=2
 innodb_buffer_pool_size=256M
 ```
+![](https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.0-9/26815549_1991024691175207_6761500742533050058_n.jpg?oh=3531f9d43bc7904e685ed15111e9a39e&oe=5AE3BF10)
  Start the MySql server:
 ```
 # chkconfig mysqld on

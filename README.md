@@ -65,9 +65,8 @@ Change the MySql root password:
 # /usr/bin/mysqladmin -u root password {password}
 ```
 
-### Nagios user setup
+### Adding the Nagios User and Group
 
-Adding the Nagios User and Group
 Next add the appropriate user and groups for the Nagios process to run:
 ```
 useradd nagios

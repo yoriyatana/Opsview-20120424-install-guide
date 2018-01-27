@@ -59,8 +59,8 @@ nagios@master$ ssh {slave_hostname} # Should be logged into slave system
 ```
 5. Set up the profile for the Nagios user on the *slave server*:
 ```
-nagios@slave$ echo "test -f /usr/local/nagios/bin/profile && . /usr/local/nagios/bin/profile" >> ~/.profile
-nagios@slave$ chown nagios:nagios ~/.profile
+nagios@slave$ echo "test -f /usr/local/nagios/bin/profile && . /usr/local/nagios/bin/profile" >> ~nagios/.profile
+nagios@slave$ chown nagios:nagios ~nagios/.profile
 ```
 6. Copy the check_reqs and profile scripts from the master onto the slave as the nagios user
 This should work without prompting for authentication:

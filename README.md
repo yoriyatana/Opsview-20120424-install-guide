@@ -2,8 +2,7 @@
 
 ## Prerequisites
 
-* Disable SeLinux
-
+### Disable SeLinux
 To permanently disable SELinux, use your favorite text editor to open the file `/etc/sysconfig/selinux` as follows:
 ```
 root# vim /etc/sysconfig/selinux
@@ -22,13 +21,12 @@ root# sestatus
 ```
 ![Check SELinux Status](https://www.tecmint.com/wp-content/uploads/2016/07/Check-SELinux-Status.png)
 
-* Packages
-
-Install the required packages.
+### Install the required packages.
 ```
 root# yum install -y epel-release vim mysql-server
 ```
-### OPSview RPM Installation (Offline)
+
+## OPSview RPM Installation (Offline)
 Download the following files and transfer these to your Opsview server.
 ```
 opsview-3.20120424.0.8487-1.el6.noarch.rpm

@@ -10,7 +10,7 @@ where the %25 is the URL encoded value for a %, the SQL wildcard character.
 Search for all hosts that in hostgroup `HOSTGROUP`:
 
 ```
-opsview_rest --username=XXXX --password=YYYY --data-format=json --pretty GET config/host"?&s.hostgroup.name=HOSTGROUP&rows=all
+opsview_rest --username=XXXX --password=YYYY --data-format=json --pretty GET config/host"?&s.hostgroup.name=HOSTGROUP&rows=all"
 ```
 
 ## Delete host using id field:

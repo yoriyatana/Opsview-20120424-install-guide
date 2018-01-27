@@ -27,17 +27,17 @@ root@slave# yum install -y epel-release vim
 ```
 ## Pre-install Tasks
 These steps are to be performed on the *new slave server*, unless otherwise stated.
-### Create the nagios and nagcmd groups:
+1. Create the nagios and nagcmd groups:
 ```
 roo@slave# groupadd nagios 
 root@slave# groupadd nagcmd
 ```
-### Create the nagios user and set its password to a known and secure value:
+2. Create the nagios user and set its password to a known and secure value:
 ```
 root@slave# useradd -g nagios -G nagcmd -d /var/log/nagios -m nagios 
 root@slave# passwd nagios 
 ```
-### Ensure nagios user has root access for specific commands via sudo (note also the nagios user should have sudo on its PATH to use this correctly):
+3. Ensure nagios user has root access for specific commands via sudo (note also the nagios user should have sudo on its PATH to use this correctly):
 ```
 root@slave# visudo
 ```
@@ -45,7 +45,7 @@ add the following line
 ```
 nagios ALL = NOPASSWD: /usr/local/nagios/bin/install_slave
 ```
-### On the *master server*, copy the nagios SSH public key from the master to the slave server:
+4. On the *master server*, copy the nagios SSH public key from the master to the slave server:
 ```
 root@master# su nagios 
 nagios@master$ ssh-keygen -t dsa  # Creates your SSH public/private keys if they do not currently exist 
@@ -57,12 +57,12 @@ You should be able to connect to the slave server from the Opsview master server
 root@master$ su nagios 
 nagios@master$ ssh {slave_hostname} # Should be logged into slave system
 ```
-### Set up the profile for the Nagios user on the *slave server*:
+5. Set up the profile for the Nagios user on the *slave server*:
 ```
 nagios@slave$ echo "test -f /usr/local/nagios/bin/profile && . /usr/local/nagios/bin/profile" >> ~/.profile
 nagios@slave$ chown nagios:nagios ~/.profile
 ```
-### Copy the check_reqs and profile scripts from the master onto the slave as the nagios user
+6. Copy the check_reqs and profile scripts from the master onto the slave as the nagios user
 This should work without prompting for authentication:
 ```
 nagios@master$ scp /usr/local/nagios/installer/check_reqs /usr/local/nagios/bin/profile {slave_hostname}:
@@ -74,7 +74,7 @@ nagios@slave$ ./check_reqs slave
 ```
 Fix any dependency issues listed.
 
-### Create the temporary drop directory on the slave.
+7. Create the temporary drop directory on the slave.
 On the slave, create the temporary directory to put the transfer files:
 ```
 nagios@slave$ su root
@@ -82,7 +82,7 @@ root@slave# mkdir -p /usr/local/nagios/tmp
 root@slave# chown nagios.nagios /usr/local/nagios /usr/local/nagios/tmp  
 root@slave# chmod 775 /usr/local/nagios /usr/local/nagios/tmp 
 ```
-### Check SSH TCP Port Forwarding on the slave.
+8. Check SSH TCP Port Forwarding on the slave.
 In order to communicate with the master server, port forwarding must be enabled in `/etc/ssh/sshd_config` on the slave server. Ensure that the following option is
 set to yes (default is yes):
 ```
@@ -94,13 +94,13 @@ root@slave# service sshd restart
 ```
 
 ## Setup of the slave
-### Within the master web interface, ensure that the slave host is set up on the master server `Configuration -> Hosts -> Create New Host`
+1. Within the master web interface, ensure that the slave host is set up on the master server `Configuration -> Hosts -> Create New Host`
 
 *Note:* The host used for the slaves must have at least 1 service associated with it, otherwise a configuration reload will fail.
 
-### Within the master web interface, add the slave host as a monitoring server `Advanced -> Monitoring Servers -> Create New Monitoring Server`
+2. Within the master web interface, add the slave host as a monitoring server `Advanced -> Monitoring Servers -> Create New Monitoring Server`
 
-### From the *master server*, send the necessary configuration files to the slave host:
+3. From the *master server*, send the necessary configuration files to the slave host:
 ```
 root@slave# su nagios
 nagios@slave$ /usr/local/nagios/bin/send2slaves -t {slave_hostname} # Test connection 
@@ -108,7 +108,7 @@ nagios@slave$ /usr/local/nagios/bin/send2slaves -t {slave_hostname} # Test conne
 ```
 The slave name is optional and can be used when multiple slaves have been defined. This will produce an error `Errors requiring manual intervention: 1`and will detail running the commands in the next step.
 
-### On the slave server run the setup program:
+4. On the slave server run the setup program:
 ```
 nagios@slave$ su root 
 root@slave# cd /usr/local/nagios/tmp && ./install_slave
@@ -119,12 +119,11 @@ Can't access neither configuration file
 /usr/local/nagios/nmis/bin/../conf/nmis.conf, nor /etc/nmis/nmis.conf
 ```
 This can be ignored. This will be hidden from Opsview 3.9.1.
-### Within the master web interface, reload the Opsview configuration on the master server `erver -> Status And Reload -> Reload Configuration`
+5. Within the master web interface, reload the Opsview configuration on the master server `erver -> Status And Reload -> Reload Configuration`
 
 
 ## Source
 
 * https://www.tecmint.com/disable-selinux-temporarily-permanently-in-centos-rhel-fedora/
-* https://plone.lucidsolutions.co.nz/web/management/ebony-an-opsview-centos-6-monitoring-vm
-* https://knowledge.opsview.com/v5.0/docs/rpm-installation-offline
-* https://assets.nagios.com/downloads/nagioscore/docs/Installing_Nagios_Core_From_Source.pdf
+* https://web.archive.org/web/20101123183111/http://docs.opsview.org:80/doku.php?id=opsview-community:slavesetup
+

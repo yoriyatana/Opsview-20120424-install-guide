@@ -106,7 +106,7 @@ root@slave# su nagios
 nagios@slave$ /usr/local/nagios/bin/send2slaves -t {slave_hostname} # Test connection 
 /usr/local/nagios/bin/send2slaves {slave_hostname}
 ```
-The slave name is optional and can be used when multiple slaves have been defined. This will produce an error `Errors requiring manual intervention: 1`and will detail running the commands in the next step.
+The slave name is optional and can be used when multiple slaves have been defined. This will produce an error `Errors requiring manual intervention: 1` and will detail running the commands in the next step.
 
 4. On the slave server run the setup program:
 ```

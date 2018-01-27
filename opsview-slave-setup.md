@@ -55,9 +55,7 @@ The .ssh directory should be mode 0700 and the id_dsa file should be 0600.
 You should be able to connect to the slave server from the Opsview master server without passwords:
 ```
 root@master$ su nagios 
-nagios@master$ ssh {slave_hostname}
-
-# Should be logged into slave system
+nagios@master$ ssh {slave_hostname} # Should be logged into slave system
 ```
 ### Set up the profile for the Nagios user on the *slave server*:
 ```
